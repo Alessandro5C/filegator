@@ -27,8 +27,35 @@ class AuthController
 
     public function login(Request $request, Response $response, AuthInterface $auth)
     {
+
         $username = $request->input('username');
         $password = $request->input('password');
+
+        // echo 'USER ' . $username . ' & PWD ' . $password;
+
+        if ($auth->authenticate($username, $password)) {
+            $this->logger->log("Logged in {$username} from IP ".$request->getClientIp());
+
+            return $response->json($auth->user());
+        }
+
+        $this->logger->log("Login failed for {$username} from IP ".$request->getClientIp());
+
+        return $response->json('Login failed, please try again', 422);
+    }
+
+    public function autologin(Request $request, Response $response, AuthInterface $auth)
+    {
+        // try {
+        //     // $file = $this->storage->readStream((string) base64_decode($request->input('path')));
+        //     $file = $this->storage->readStream((string) $request->input('path'));
+        //     $file = $this->storage->readStream((string) $request->input('path'));
+        // } catch (\Exception $e) {
+        //     return $response->redirect('/');
+        // }
+
+        $username = $request->input('user');
+        $password = $request->input('pwd');
 
         if ($auth->authenticate($username, $password)) {
             $this->logger->log("Logged in {$username} from IP ".$request->getClientIp());

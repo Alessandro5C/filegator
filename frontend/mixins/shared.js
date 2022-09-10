@@ -150,6 +150,10 @@ const funcs = {
         duration: 5000,
       })
     },
+    getShareLink(puser, ppwd) {
+      return Vue.config.baseURL+'/sharelink&user='+puser+'&pwd='+ppwd
+      // return Vue.config.baseURL+'/sharelink&path='+encodeURIComponent(Base64.encode(path))
+    },
     getDownloadLink(path) {
       return Vue.config.baseURL+'/download&path='+encodeURIComponent(Base64.encode(path))
     },

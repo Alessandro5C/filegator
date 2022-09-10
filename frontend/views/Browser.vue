@@ -79,6 +79,12 @@
           </div>
         </section>
 
+        <section>
+          <button @click="shareInfo">
+            SHARE 1
+          </button>
+        </section>
+
         <b-table v-if="can('read')"
                  :data="content"
                  :default-sort="defaultSort"
@@ -162,6 +168,7 @@
 
 <script>
 import Vue from 'vue'
+import ShareInfoEdit from './partials/ShareInfoEdit'
 import Menu from './partials/Menu'
 import Tree from './partials/Tree'
 import Editor from './partials/Editor'
@@ -242,6 +249,19 @@ export default {
     }
   },
   methods: {
+    shareInfo() {
+      this.$modal.open({
+        parent: this,
+        props: { user: { role: 'user'}, action: 'add' },
+        hasModalCard: true,
+        component: ShareInfoEdit,
+        events: {
+          updated: ret => {
+            this.users.push(ret)
+          }
+        },
+      })
+    },
     toggleHidden() {
       this.showAllEntries = !this.showAllEntries
       this.loadFiles()

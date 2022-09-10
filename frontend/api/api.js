@@ -139,6 +139,48 @@ const api = {
         .catch(error => reject(error))
     })
   },
+  listShare() {
+    return new Promise((resolve, reject) => {
+      axios.get('listshare')
+        .then(res => resolve(res.data.data))
+        .catch(error => reject(error))
+    })
+  },
+  deleteShareInfo(params) {
+    return new Promise((resolve, reject) => {
+      axios.post('deleteshareinfo/'+params.username)
+        .then(res => resolve(res.data.data))
+        .catch(error => reject(error))
+    })
+  },
+  storeShareInfo(params) {
+    return new Promise((resolve, reject) => {
+      axios.post('storeshareinfo', {
+        role: params.role,
+        name: params.name,
+        username: params.username,
+        homedir: params.homedir,
+        password: params.password,
+        permissions: params.permissions,
+      })
+        .then(res => resolve(res.data.data))
+        .catch(error => reject(error))
+    })
+  },
+  updateShareInfo(params) {
+    return new Promise((resolve, reject) => {
+      axios.post('updateshareinfo/'+params.key, {
+        role: params.role,
+        name: params.name,
+        username: params.username,
+        homedir: params.homedir,
+        password: params.password,
+        permissions: params.permissions,
+      })
+        .then(res => resolve(res.data.data))
+        .catch(error => reject(error))
+    })
+  },
   listUsers() {
     return new Promise((resolve, reject) => {
       axios.get('listusers')

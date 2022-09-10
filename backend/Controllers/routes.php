@@ -13,6 +13,16 @@ return [
     ],
     [
         'route' => [
+            'GET', '/sharelink', '\Filegator\Controllers\AuthController@autologin',
+        ],
+        'roles' => [
+            'guest',
+        ],
+        'permissions' => [
+        ],
+    ],
+    [
+        'route' => [
             'POST', '/login', '\Filegator\Controllers\AuthController@login',
         ],
         'roles' => [
@@ -213,6 +223,47 @@ return [
         ],
         'permissions' => [
             'read', 'download', 'batchdownload',
+        ],
+    ],
+    // admins for now???
+    [
+        'route' => [
+            'GET', '/listshare', '\Filegator\Controllers\ShareController@listShare',
+        ],
+        'roles' => [
+            'guest', 'user', 'admin',
+        ],
+        'permissions' => [
+        ],
+    ],
+    [
+        'route' => [
+            'POST', '/storeshareinfo', '\Filegator\Controllers\ShareController@storeShareInfo',
+        ],
+        'roles' => [
+            'guest', 'user', 'admin',
+        ],
+        'permissions' => [
+        ],
+    ],
+    [
+        'route' => [
+            'POST', '/updateshareinfo/{username}', '\Filegator\Controllers\ShareController@updateShareInfo',
+        ],
+        'roles' => [
+            'guest', 'user', 'admin',
+        ],
+        'permissions' => [
+        ],
+    ],
+    [
+        'route' => [
+            'POST', '/deleteshareinfo/{username}', '\Filegator\Controllers\AdminController@deleteShareInfo',
+        ],
+        'roles' => [
+            'guest', 'user', 'admin',
+        ],
+        'permissions' => [
         ],
     ],
     // admins
